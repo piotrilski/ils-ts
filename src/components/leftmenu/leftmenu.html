@@ -1,0 +1,11 @@
+<h1>List</h1>
+
+<div class="catalog-searcher">
+	<md-autocomplete md-selected-item="vm.selectedItem" 
+		md-search-text="searchText" 
+		md-items="item in vm.getMatches(searchText)" 
+		md-item-text="item.name"
+		placeholder="Search for catalog...">
+		<span md-highlight-text="searchText">{{item.name}}</span>
+	</md-autocomplete>
+</div>

@@ -19,22 +19,41 @@
     <!-- endinject -->
     <!-- endbuild -->
   </head>
-  <body>
+  <body ng-controller="AppCtrl as vm" layout="column">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div ui-view></div>
+    <div layout="row" flex>
+      <md-sidenav layout="column" 
+          id="left"
+          class="md-sidenav-left md-whiteframe-z2" 
+          md-component-id="left" 
+          md-is-locked-open="$mdMedia('gt-sm')">
+          <md-toolbar layout="row">
+          <!-- logo here -->
+        </md-toolbar>
+          <div ui-view="leftView"></div>          
+      </md-sidenav>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-    <script>
-      (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-      function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-      e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-      e.src='//www.google-analytics.com/analytics.js';
-      r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-      ga('create','UA-XXXXX-X');ga('send','pageview');
-    </script>
+      <div layout="column" flex id="content">
+        <md-toolbar layout="row">
+          <button ng-click="vm.toggleSidenav('left')" 
+              hide-gt-sm
+              class="hideMenuBtn">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div ng-include="'components/navbar/navbar.html'"
+             layout="column" flex
+             layout-align="center">
+          </div>
+        </md-toolbar>
+
+        <md-content layout="column" flex class="md-padding">
+          <div ui-view="mainView"></div>
+        </md-content>
+      </div>
+    </div>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
